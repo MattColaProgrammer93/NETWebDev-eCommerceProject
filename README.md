@@ -13,6 +13,7 @@ Sample:
 
 # The guide that I used to refer to
 - [Getting Started with EF Core in an ASP.NET MVC web app](https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro?view=aspnetcore-6.0)
+- [CRUD Guide](https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/crud?view=aspnetcore-6.0)
 
 # What did I use to construct the website?
 I have used [Visual Studio](https://visualstudio.microsoft.com/vs/) to make the website. Visual Studio is owned by [Microsoft](https://www.microsoft.com/en-us/).
