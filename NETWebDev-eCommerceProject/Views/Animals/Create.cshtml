@@ -4,7 +4,15 @@
     ViewData["Title"] = "Create your new animal";
 }
 
-<h1>Create</h1>
+@if (ViewData["Message"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewData["Message"]
+    </div>
+}
+else
+{
+<h1 class="display-4">Create your brand new animal</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -26,6 +34,7 @@
         </form>
     </div>
 </div>
+}
 
 <div>
     <a asp-action="Index">Back to List</a>
