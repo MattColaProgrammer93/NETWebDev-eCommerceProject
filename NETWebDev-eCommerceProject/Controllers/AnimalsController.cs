@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NETWebDev_eCommerceProject.Data;
 using NETWebDev_eCommerceProject.Models;
 
@@ -12,6 +13,16 @@ namespace NETWebDev_eCommerceProject.Controllers
         public AnimalsController(AnimalCreationContext context)
         {
             _context = context;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            // Get all the animals in database
+            // List<Animal> animals = _context.Animals.ToList();
+            List<Animal> animals = await (from animal in _context.Animals
+                                          select animal).ToListAsync();
+            // Show them to the catalog in the homepage
+            return View(animals);
         }
 
         [HttpGet]
@@ -39,5 +50,6 @@ namespace NETWebDev_eCommerceProject.Controllers
 
             return View(a);
         }
+
     }
 }
