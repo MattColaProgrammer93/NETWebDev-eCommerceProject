@@ -21,13 +21,15 @@ namespace NETWebDev_eCommerceProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Animal a)
+        public async Task<IActionResult> Create(Animal a)
         {
             if (ModelState.IsValid)
             {
+                // For async code in the tutorial
+                // https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro?view=aspnetcore-6.0#asynchronous-code 
                 // Add to DB
-                _context.Animals.Add(a); // Prepares insert
-                _context.SaveChanges(); // Executes pending insert
+                _context.Animals.Add(a);            // Prepares insert
+                await _context.SaveChangesAsync();  // Executes pending insert
 
                 // Show success message on page
                 ViewData["Message"] = $"{a.Name} was made and added successfully!";
