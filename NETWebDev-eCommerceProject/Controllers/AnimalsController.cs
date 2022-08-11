@@ -51,5 +51,32 @@ namespace NETWebDev_eCommerceProject.Controllers
             return View(a);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            Animal? animalToEdit = await _context.Animals.FindAsync(id);
+
+            if (animalToEdit == null)
+            {
+                return NotFound();
+            }
+
+            return View(animalToEdit);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Animal animalModel)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Animals.Update(animalModel);
+                await _context.SaveChangesAsync();
+
+                TempData["Message"] = $"{animalModel.Name} was updated successfully!";
+                return RedirectToAction("Index");
+            }
+
+            return View(animalModel);
+        }
     }
 }

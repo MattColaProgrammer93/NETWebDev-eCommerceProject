@@ -6,6 +6,14 @@
 
 <h1>Animal Catalog</h1>
 
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["Message"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
 <p>
     <a asp-action="Create" asp-controller="Animals">Create New</a>
 </p>
@@ -37,9 +45,9 @@
                 @Html.DisplayFor(modelItem => item.Type)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.AnimalId">Edit</a>
+                <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.AnimalId">Details</a>
+                <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.AnimalId">Delete</a>
             </td>
         </tr>
 }
