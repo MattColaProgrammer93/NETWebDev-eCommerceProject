@@ -63,5 +63,19 @@ namespace NETWebDev_eCommerceProject.Controllers
 
             return View(animalToEdit);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Animal animalModel)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Animals.Update(animalModel);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(animalModel);
+        }
     }
 }
