@@ -51,5 +51,17 @@ namespace NETWebDev_eCommerceProject.Controllers
             return View(a);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            Animal? animalToEdit = await _context.Animals.FindAsync(id);
+
+            if (animalToEdit == null)
+            {
+                return NotFound();
+            }
+
+            return View(animalToEdit);
+        }
     }
 }
