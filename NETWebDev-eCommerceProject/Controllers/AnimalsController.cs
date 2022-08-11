@@ -72,6 +72,7 @@ namespace NETWebDev_eCommerceProject.Controllers
                 _context.Animals.Update(animalModel);
                 await _context.SaveChangesAsync();
 
+                TempData["Message"] = $"{animalModel.Name} was updated successfully!";
                 return RedirectToAction("Index");
             }
 
