@@ -107,5 +107,18 @@ namespace NETWebDev_eCommerceProject.Controllers
             TempData["Message"] = "This animal was already deleted";
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            Animal animalDetails = await _context.Animals.FindAsync(id);
+
+            if (animalDetails == null)
+            {
+                return NotFound();
+            }
+
+            return View(animalDetails);
+        }
     }
 }
