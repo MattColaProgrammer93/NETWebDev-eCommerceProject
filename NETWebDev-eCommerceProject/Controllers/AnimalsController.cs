@@ -78,5 +78,34 @@ namespace NETWebDev_eCommerceProject.Controllers
 
             return View(animalModel);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            Animal? animalToDelete = await _context.Animals.FindAsync(id);
+
+            if (animalToDelete == null)
+            {
+                return NotFound();
+            }
+
+            return View(animalToDelete);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            Animal? animalToDelete = await _context.Animals.FindAsync(id);
+
+            if (animalToDelete != null)
+            {
+                _context.Animals.Remove(animalToDelete);
+                await _context.SaveChangesAsync();
+                TempData["Message"] = animalToDelete.Name + " was deleted successfully";
+                return RedirectToAction("Index");
+            }
+            TempData["Message"] = "This animal was already deleted";
+            return RedirectToAction("Index");
+        }
     }
 }
