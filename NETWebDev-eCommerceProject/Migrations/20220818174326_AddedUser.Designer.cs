@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NETWebDev_eCommerceProject.Data;
 
@@ -10,9 +11,10 @@ using NETWebDev_eCommerceProject.Data;
 namespace NETWebDev_eCommerceProject.Migrations
 {
     [DbContext(typeof(AnimalCreationContext))]
-    partial class AnimalCreationContextModelSnapshot : ModelSnapshot
+    [Migration("20220818174326_AddedUser")]
+    partial class AddedUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,11 +46,11 @@ namespace NETWebDev_eCommerceProject.Migrations
 
             modelBuilder.Entity("NETWebDev_eCommerceProject.Models.User", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("MyProperty")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MyProperty"), 1L, 1);
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -59,9 +61,10 @@ namespace NETWebDev_eCommerceProject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserId");
+                    b.HasKey("MyProperty");
 
                     b.ToTable("Users");
                 });
