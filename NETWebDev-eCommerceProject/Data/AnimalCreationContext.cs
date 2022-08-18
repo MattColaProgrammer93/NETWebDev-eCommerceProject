@@ -12,5 +12,7 @@ namespace NETWebDev_eCommerceProject.Data
         }
 
         public DbSet<Animal> Animals { get; set; }
+
+        public DbSet<User> Users { get; set; }
     }
 }
