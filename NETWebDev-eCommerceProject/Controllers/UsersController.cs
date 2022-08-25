@@ -59,6 +59,7 @@ namespace NETWebDev_eCommerceProject.Controllers
                 // If exists, send to homepage
                 if (u != null)
                 {
+                    HttpContext.Session.SetString("Email", loginModel.Email);
                     return RedirectToAction("Index", "Home");
                 }
 
