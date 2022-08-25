@@ -34,6 +34,8 @@ namespace NETWebDev_eCommerceProject.Controllers
                 _context.Users.Add(newUser);
                 await _context.SaveChangesAsync();
 
+                LogUserIn(newUser.Email);
+
                 // Redirect to home page
                 return RedirectToAction("Index", "Home");
             }
@@ -59,7 +61,7 @@ namespace NETWebDev_eCommerceProject.Controllers
                 // If exists, send to homepage
                 if (u != null)
                 {
-                    HttpContext.Session.SetString("Email", loginModel.Email);
+                    LogUserIn(loginModel.Email);
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -67,6 +69,17 @@ namespace NETWebDev_eCommerceProject.Controllers
             }
             // Return to page if no record is found, or ModelState is invalid
             return View(loginModel);
+        }
+
+        private void LogUserIn(string email)
+        {
+            HttpContext.Session.SetString("Email", email);
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
