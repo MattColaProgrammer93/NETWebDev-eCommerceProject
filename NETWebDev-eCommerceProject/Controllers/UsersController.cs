@@ -34,10 +34,52 @@ namespace NETWebDev_eCommerceProject.Controllers
                 _context.Users.Add(newUser);
                 await _context.SaveChangesAsync();
 
+                LogUserIn(newUser.Email);
+
                 // Redirect to home page
                 return RedirectToAction("Index", "Home");
             }
             return View(regModel);
+        }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(LoginViewModel loginModel)
+        {
+            if (ModelState.IsValid)
+            {
+                // Check DB for credentials
+                User? u = (from user in _context.Users
+                           where user.Email == loginModel.Email &&
+                                 user.Password == loginModel.Password
+                           select user).SingleOrDefault();
+                // If exists, send to homepage
+                if (u != null)
+                {
+                    LogUserIn(loginModel.Email);
+                    return RedirectToAction("Index", "Home");
+                }
+
+                ModelState.AddModelError(string.Empty, "Credentials not found");
+            }
+            // Return to page if no record is found, or ModelState is invalid
+            return View(loginModel);
+        }
+
+        private void LogUserIn(string email)
+        {
+            HttpContext.Session.SetString("Email", email);
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
