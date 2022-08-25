@@ -39,5 +39,33 @@ namespace NETWebDev_eCommerceProject.Controllers
             }
             return View(regModel);
         }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(LoginViewModel loginModel)
+        {
+            if (ModelState.IsValid)
+            {
+                // Check DB for credentials
+                User? u = (from user in _context.Users
+                           where user.Email == loginModel.Email &&
+                                 user.Password == loginModel.Password
+                           select user).SingleOrDefault();
+                // If exists, send to homepage
+                if (u != null)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
+                ModelState.AddModelError(string.Empty, "Credentials not found");
+            }
+            // Return to page if no record is found, or ModelState is invalid
+            return View(loginModel);
+        }
     }
 }

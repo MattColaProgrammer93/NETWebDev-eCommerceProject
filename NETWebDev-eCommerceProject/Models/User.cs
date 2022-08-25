@@ -41,6 +41,7 @@ namespace NETWebDev_eCommerceProject.Models
     public class LoginViewModel
     {
         [Required]
+        [EmailAddress]
         public string Email { get; set; } = null!;
 
         [Required]
