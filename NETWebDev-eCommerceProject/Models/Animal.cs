@@ -26,6 +26,17 @@ namespace NETWebDev_eCommerceProject.Models
         [Required]
         public string Type { get; set; }
 
-        // Todo: Add Abilities
+    }
+
+    /// <summary>
+    /// A single animal that has been added to the user's deck cookie
+    /// </summary>
+    public class DeckAnimalViewModel
+    {
+        public int AnimalId { get; set; }
+
+        public string Name { get; set; }
+
+        public string Type { get; set; }
     }
 }
