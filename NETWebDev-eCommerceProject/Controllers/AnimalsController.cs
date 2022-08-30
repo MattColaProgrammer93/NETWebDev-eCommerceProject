@@ -15,12 +15,24 @@ namespace NETWebDev_eCommerceProject.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
+            // Number of animals to display per page
+            const int NumOfAnimalsToDisplayPerPage = 3;
+            // Needed to use the current page and figure out, how many animals to be skipped
+            const int PageOffset = 1;
+            // Set currPage to id if it has value, otherwise use 1
+            int currPage = id ?? 1;
+
+            // Commented method syntax version, same code below as query syntax
+            // List<Animal> animals = _context.Animals.Skip(NumOfAnimalsToDisplayPerPage * (currPage - PageOffset))
+            // .Take(NumOfAnimalsToDisplayPerPage).ToList();
+
             // Get all the animals in database
-            // List<Animal> animals = _context.Animals.ToList();
             List<Animal> animals = await (from animal in _context.Animals
-                                          select animal).ToListAsync();
+                                          select animal)
+                                          .Skip(NumOfAnimalsToDisplayPerPage * (currPage - PageOffset))
+                                          .ToListAsync();
             // Show them to the catalog in the homepage
             return View(animals);
         }
