@@ -32,6 +32,7 @@ namespace NETWebDev_eCommerceProject.Controllers
             List<Animal> animals = await (from animal in _context.Animals
                                           select animal)
                                           .Skip(NumOfAnimalsToDisplayPerPage * (currPage - PageOffset))
+                                          .Take(NumOfAnimalsToDisplayPerPage)
                                           .ToListAsync();
             // Show them to the catalog in the homepage
             return View(animals);
