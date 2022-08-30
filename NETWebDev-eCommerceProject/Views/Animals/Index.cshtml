@@ -51,7 +51,7 @@
                         <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.AnimalId">Edit</a>
                         <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.AnimalId">Details</a>
                         <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.AnimalId">Delete</a>
-                        <a class="btn btn-outline-success" asp-action="Deck" asp-action="Add" asp-route-id="@item.AnimalId">Add to Deck</a>
+                        <a class="btn btn-outline-success" asp-controller="Deck" asp-action="Add" asp-route-id="@item.AnimalId">Add to Deck</a>
                     </td>
                 </tr>
         }
