@@ -24,18 +24,29 @@ namespace NETWebDev_eCommerceProject.Controllers
             // Set currPage to id if it has value, otherwise use 1
             int currPage = id ?? 1;
 
+            // Total number of animals in the database
+            int totalNumberOfAnimals = await _context.Animals.CountAsync();
+
+            double maxNumPages = Math.Ceiling((double)totalNumberOfAnimals / NumOfAnimalsToDisplayPerPage);
+            int lastPage = Convert.ToInt32(maxNumPages); // Rounding pages up, to next whole page number
+
+            ViewData["LastPage"] = lastPage;
+
             // Commented method syntax version, same code below as query syntax
             // List<Animal> animals = _context.Animals.Skip(NumOfAnimalsToDisplayPerPage * (currPage - PageOffset))
             // .Take(NumOfAnimalsToDisplayPerPage).ToList();
 
             // Get all the animals in database
-            List<Animal> animals = await (from animal in _context.Animals
+            List <Animal> animals = await (from animal in _context.Animals
                                           select animal)
                                           .Skip(NumOfAnimalsToDisplayPerPage * (currPage - PageOffset))
                                           .Take(NumOfAnimalsToDisplayPerPage)
                                           .ToListAsync();
-            // Show them to the catalog in the homepage
-            return View(animals);
+
+            AnimalCatalogViewModel catalogModel = new(animals, lastPage, currPage);
+
+            // Show the client the page along with the catalogModel
+            return View(catalogModel);
         }
 
         [HttpGet]
