@@ -5,10 +5,13 @@ allow the user to create their own animal as well. This is inspired by [Pokemon]
 Sample:
 ![AnimalCreationHomePage](https://user-images.githubusercontent.com/103535096/181599509-59d4ea30-ace1-4b1f-a324-f88cb25083e3.jpeg)
 
-
-# Future Features
+# Features
 - Allows user to create their own animal (must be appropriate)
 - Displays the list of animals that other users created.
+- The user can delete, edit, and add to their deck.
+- Go through pages with a simple click.
+# Future Features
+- Users can store animals into their own deck!
 - And much more!!!
 
 # The guide that I used to refer to
